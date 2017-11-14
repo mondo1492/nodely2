@@ -1,7 +1,7 @@
 const Game = require("./game");
 
 class SourceNode {
-  constructor(allNodes) {
+  constructor(allNodes, val) {
     this.x = this.generateRandomX();
     this.y = this.generateRandomY();
     this.assureNonOverlapPosition(allNodes);
@@ -9,7 +9,7 @@ class SourceNode {
     this.xRange = [this.x - 40, this.x + 40];
     this.yRange = [this.y - 40, this.y + 40];
     this.lines = [];
-    this.val = Math.floor(Math.random() * (5)) + 1;
+    this.val = val ? val : Math.floor(Math.random() * (5)) + 1;
     this.factor = 0.2;
     this.color = SourceNode.ASSOC_COLOR[this.val];
     this.timeAlive = 2500;

@@ -441,9 +441,12 @@ class GameView {
       });
 
       if (this.newGame) {
-        this.sourceNodes.push(new SourceNode(this.combineAllNodes()));
-        this.sourceNodes.push(new SourceNode(this.combineAllNodes()));
-        this.sinkNodes.push(new SinkNode(this.combineAllNodes(), 1));
+        this.sourceNodes.push(new SourceNode(this.combineAllNodes(), 4));
+        this.sourceNodes.push(new SourceNode(this.combineAllNodes(), 3));
+        this.sourceNodes.push(new SourceNode(this.combineAllNodes(), 1));
+        this.sinkNodes.push(new SinkNode(this.combineAllNodes(), 4));
+        this.sinkNodes.push(new SinkNode(this.combineAllNodes(), 5));
+        this.sinkNodes.push(new SinkNode(this.combineAllNodes(), 2));
         this.newGame = false;
       }
 
@@ -549,7 +552,7 @@ module.exports = GameView;
 const Game = __webpack_require__(0);
 
 class SourceNode {
-  constructor(allNodes) {
+  constructor(allNodes, val) {
     this.x = this.generateRandomX();
     this.y = this.generateRandomY();
     this.assureNonOverlapPosition(allNodes);
@@ -557,7 +560,7 @@ class SourceNode {
     this.xRange = [this.x - 40, this.x + 40];
     this.yRange = [this.y - 40, this.y + 40];
     this.lines = [];
-    this.val = Math.floor(Math.random() * (5)) + 1;
+    this.val = val ? val : Math.floor(Math.random() * (5)) + 1;
     this.factor = 0.2;
     this.color = SourceNode.ASSOC_COLOR[this.val];
     this.timeAlive = 2500;
@@ -781,10 +784,8 @@ class PowerBall {
     this.y = line.y;
     this.x2 = line.x2;
     this.y2 = line.y2;
-    // this.percent = 1 / Math.sqrt(Math.pow((this.x2-this.x),2) + Math.pow((this.y2-this.y),2));
     this.xIncrease = (this.x2 - this.x) / (100);
     this.yIncrease = (this.y2 - this.y) / (100);
-    // this.percentUpdate = this.percent;
     this.associatedNode = node;
     this.destinationNode = dest;
   }
@@ -805,9 +806,6 @@ class PowerBall {
   }
 
   updatePosition() {
-    // this.x += (this.x2 - this.x) * this.percent;
-    // this.y += (this.y2 - this.y) * this.percent;
-    // this.percent +=   (this.percentUpdate / 100);
     this.x += this.xIncrease;
     this.y += this.yIncrease;
   }
@@ -821,7 +819,6 @@ module.exports = PowerBall;
 /***/ (function(module, exports, __webpack_require__) {
 
 const Game = __webpack_require__(0);
-
 
 class SinkNode {
   constructor(stored, initialVal) {
@@ -888,16 +885,11 @@ class SinkNode {
     ctx.fill();
     ctx.lineWidth = 15;
     ctx.strokeStyle = '#003300';
-
     ctx.font = "30px Georgia";
     ctx.fillStyle = "#000000";
-
-
-
     ctx.fillStyle = 'white';
     ctx.fillText(this.val, this.x - 8, this.y + 5);
     ctx.stroke();
-
   }
 }
 

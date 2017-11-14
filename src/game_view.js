@@ -300,9 +300,12 @@ class GameView {
       });
 
       if (this.newGame) {
-        this.sourceNodes.push(new SourceNode(this.combineAllNodes()));
-        this.sourceNodes.push(new SourceNode(this.combineAllNodes()));
-        this.sinkNodes.push(new SinkNode(this.combineAllNodes(), 1));
+        this.sourceNodes.push(new SourceNode(this.combineAllNodes(), 4));
+        this.sourceNodes.push(new SourceNode(this.combineAllNodes(), 3));
+        this.sourceNodes.push(new SourceNode(this.combineAllNodes(), 1));
+        this.sinkNodes.push(new SinkNode(this.combineAllNodes(), 4));
+        this.sinkNodes.push(new SinkNode(this.combineAllNodes(), 5));
+        this.sinkNodes.push(new SinkNode(this.combineAllNodes(), 2));
         this.newGame = false;
       }
 

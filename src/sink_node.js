@@ -1,6 +1,5 @@
 const Game = require("./game");
 
-
 class SinkNode {
   constructor(stored, initialVal) {
     this.x = this.generateRandomX();
@@ -66,16 +65,11 @@ class SinkNode {
     ctx.fill();
     ctx.lineWidth = 15;
     ctx.strokeStyle = '#003300';
-
     ctx.font = "30px Georgia";
     ctx.fillStyle = "#000000";
-
-
-
     ctx.fillStyle = 'white';
     ctx.fillText(this.val, this.x - 8, this.y + 5);
     ctx.stroke();
-
   }
 }
 
