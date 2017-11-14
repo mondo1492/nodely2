@@ -1,0 +1,47 @@
+#game {
+  display: flex;
+  justify-content: center;
+}
+
+#SplashScreen {
+  /*display: flex;
+  justify-content: center;
+
+  flex-direction: column;*/
+  display: flex;
+  /*position: relative;*/
+  flex-direction: row;
+  justify-content: center;
+ }
+
+#img1 {
+  position: absolute;
+}
+
+#vid {
+  margin-left: -10px;
+  position: absolute;
+}
+#StartButton {
+  margin-top: 350px;
+  margin-left: 400px;
+  font-size: 100px;
+  color: pink;
+  background: none;
+  border: none;
+  outline: none;
+  position: relative;
+  cursor: pointer;
+}
+
+#StartButton:hover {
+  opacity: 0.5;
+}
+#TutorialButton {
+  margin-top: 400px;
+  position: relative;
+}
+#canvas {
+  border: #666 1px solid;
+  background-color: lightgreen;
+}

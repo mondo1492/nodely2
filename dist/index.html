@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Nodely</title>
+    <link href="style.css" type="text/css" rel="stylesheet">
+  </head>
+  <body id="body">
+    <script type="application/javascript" src="bundle.js"></script>
+
+    <div id="game" style="display: none;">
+      <canvas id="canvas" tabindex='1'></canvas>
+    </div>
+
+    <div id="SplashScreen">
+      <video id="vid" width="1000" height="600" autoplay = "autoplay" preload="false" muted="muted">
+       <source src="../resources/color_background.mp4" type="video/mp4" />
+       Your browser does not support the video tag.
+     </video>
+     <img id="img1" src="../resources/nodely.png" height="600" width="1000"/>
+     <button id="StartButton" type="button">Start</button>
+    </div>
+
+
+
+    <script>
+    document.getElementById('StartButton').addEventListener('click', function() {
+      document.getElementById('game').style.display = 'flex';
+      document.getElementById('SplashScreen').style.display = 'none';
+    });
+    </script>
+  </body>
+</html>
