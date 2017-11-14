@@ -18,11 +18,12 @@
      </video>
      <img id="img1" src="../resources/nodely.png" height="600" width="1000"/>
      <div id='text-container'>
-       <h4>Instructions</h4>
        <div id='instructions'>
+         <h4>Instructions</h4>
          <h5>1. Click and drag on diamond nodes to create new nodes</h5>
          <h5>2. Increase node values by connecting them</h5>
          <h5>3. Clear circular nodes before their timer runs out!</h5>
+         <h5>4. Press 'P' to Pause, 'R' to Reset</h5>
        </div>
 
 
@@ -39,6 +40,12 @@
     document.getElementById('StartButton').addEventListener('click', function() {
       document.getElementById('game').style.display = 'flex';
       document.getElementById('SplashScreen').style.display = 'none';
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.keyCode === 82) {
+        document.getElementById('game').style.display = 'none';
+        document.getElementById('SplashScreen').style.display = 'flex';
+      }
     });
     </script>
   </body>

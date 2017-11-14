@@ -15,5 +15,3 @@ This project will be implemented with the following technologies:
 
 Status
 In progress, but major features have been implemented. Bug fixes and seamless gameplay are next on the agenda.
-# nodely2
-# nodely2
