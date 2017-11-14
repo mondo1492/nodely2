@@ -193,32 +193,29 @@ class GameView {
 
 
   deleteNode(xCord, yCord) {
-
-    ///fix this
-    let subNodeIdx = 0;
-    let sourceNodeIdx = 0;
-    let newNodes = [];
-    // let newLines = [];
-    let self = this;
-    while (subNodeIdx < this.subNodes.length) {
-      if (!(xCord >= this.subNodes[subNodeIdx].xRange[0] &&
-          xCord <= this.subNodes[subNodeIdx].xRange[1] &&
-          yCord >= this.subNodes[subNodeIdx].yRange[0] &&
-          yCord <= this.subNodes[subNodeIdx].yRange[1])) {
-            newNodes.push(this.subNodes[subNodeIdx]);
-            for (let i = 0; i < this.subNodes[subNodeIdx].lines.length; i++) {
-              if (xCord >= this.subNodes[subNodeIdx].lines[i].destinationNode.xRange[0] &&
-                  xCord <= this.subNodes[subNodeIdx].lines[i].destinationNode.xRange[1] &&
-                  yCord >= this.subNodes[subNodeIdx].lines[i].destinationNode.yRange[0] &&
-                  yCord <= this.subNodes[subNodeIdx].lines[i].destinationNode.yRange[1]) {
-                this.subNodes[subNodeIdx].deleteLine(i);
-              }
-            }
+    let newSubs = [];
+    let newSources = [];
+    let mutableNodes = this.subNodes.concat(this.sourceNodes);
+    for (let i = 0; i < mutableNodes.length; i++) {
+      if (!(this.inRange(xCord, yCord, mutableNodes[i]))) {
+        for (let j = 0; j < mutableNodes[i].lines.length; j++) {
+          if (xCord >= mutableNodes[i].lines[j].destinationNode.xRange[0] &&
+              xCord <= mutableNodes[i].lines[j].destinationNode.xRange[1] &&
+              yCord >= mutableNodes[i].lines[j].destinationNode.yRange[0] &&
+              yCord <= mutableNodes[i].lines[j].destinationNode.yRange[1]) {
+            mutableNodes[i].deleteLine(j);
           }
-          subNodeIdx += 1;
         }
-      self.skipMouseMove = false;
-      this.subNodes = newNodes;
+        if (mutableNodes[i] instanceof SourceNode) {
+          newSources.push(mutableNodes[i]);
+        } else {
+          newSubs.push(mutableNodes[i]);
+        }
+      }
+    }
+    this.skipMouseMove = false;
+    this.sourceNodes = newSources;
+    this.subNodes = newSubs;
   }
 
   onSameChain(src, end) {
@@ -287,7 +284,6 @@ class GameView {
 
           let addUp = false;
           let sameChain = false;
-          let subNodeIdx = 0;
           const powerBall = new PowerBall(self.dragLine, node);
           self.dragLine.balls.push(powerBall);
           self.dragLine.defaultBall = new PowerBall(self.dragLine, node);
@@ -330,6 +326,8 @@ class GameView {
               node.addLines(self.dragLine);
               toSinkNode = true;
             }
+          } else if (destNode instanceof SourceNode) {
+            addUp = false;
           } else if (!addUp && !toSinkNode && !sameChain) {
             let newNode = new SubNode(xCordUp, yCordUp, self.ctx, addVal, node.uniqId);
             self.subNodes.push(newNode);
@@ -342,6 +340,7 @@ class GameView {
           } else {
             addUp = false;
           }
+          self.dragLine = null;
         });
       }
   }
@@ -528,9 +527,7 @@ class GameView {
       self.lineQueue.forEach(function(line) {
         self.drawBallsFromLine(line);
       });
-      // console.log(timeDelta);
       this.lastTime = time;
-      // console.log(timeDelta);
       requestAnimationFrame(this.animate.bind(this));
     } else if (this.paused === true) {
       this.game.drawPausedScreen(this.ctx);
