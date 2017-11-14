@@ -20,6 +20,11 @@ class Game {
     ctx.fillText("GameOver", (Game.DIM_X / 2) - 200, (Game.DIM_Y / 2) + 20);
     ctx.globalAlpha = 1;
   }
+  drawScore(ctx, score) {
+    ctx.fillStyle = 'black';
+    ctx.font = "30px Arial";
+    ctx.fillText(`Score ${score}`, Game.DIM_X - 150, 50);
+  }
 }
 Game.DIM_X = 1000;
 Game.DIM_Y = 600;

@@ -19,6 +19,12 @@ class SubNode {
 
   }
 
+  resetCounts() {
+    Object.keys(this.addedValues).forEach((key) => {
+      this.addedValues[key] = 0;
+    });
+  }
+
   addLines(line) {
     this.lines.push(line);
   }
@@ -37,13 +43,28 @@ class SubNode {
         fullyPowered = false;
       }
     });
+    console.log(fullyPowered);
     return fullyPowered;
+  }
+
+  checkStatus() {
+    let allGreaterThanOne = true;
+    console.log(this.addedValues);
+    Object.keys(this.addedValues).forEach((key) => {
+      if (this.addedValues[key] < 1) {
+        allGreaterThanOne = false;
+      }
+    });
+    if (allGreaterThanOne) {
+      this.decreaseValuesByOne();
+    }
   }
 
   decreaseValuesByOne() {
     Object.keys(this.addedValues).forEach((key) => {
       this.addedValues[key] -= 1;
     });
+    console.log('decreased');
   }
 
   setAddedValues(id) {

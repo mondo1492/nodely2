@@ -1,15 +1,14 @@
 const Game = require("./game");
 
 class SourceNode {
-  constructor(stored) {
+  constructor(allNodes) {
     this.x = this.generateRandomX();
     this.y = this.generateRandomY();
-    this.assureNonOverlapPosition(stored);
+    this.assureNonOverlapPosition(allNodes);
     this.uniqId = Math.floor(Math.random() * (10000000000000000)) + 1;
     this.xRange = [this.x - 40, this.x + 40];
     this.yRange = [this.y - 40, this.y + 40];
     this.lines = [];
-    this.currentLine = 0;
     this.val = Math.floor(Math.random() * (5)) + 1;
     this.factor = 0.2;
     this.color = SourceNode.ASSOC_COLOR[this.val];
@@ -22,10 +21,9 @@ class SourceNode {
   deleteLine(idx) {
     this.lines.splice(idx, 1);
   }
-  
+
   updateTimeAlive() {
     this.timeAlive -= 1;
-    // this.countDown -= 1;
   }
 
   addLines(line) {
@@ -33,12 +31,12 @@ class SourceNode {
   }
 
 
-  assureNonOverlapPosition(stored) {
-    for (let i = 0; i < stored.length; i++) {
-      if (this.x >= stored[i].xRange[0] - 50 &&
-          this.x <= stored[i].xRange[1] + 50 &&
-          this.y >= stored[i].yRange[0] - 50 &&
-          this.y <= stored[i].yRange[1] + 50)
+  assureNonOverlapPosition(allNodes) {
+    for (let i = 0; i < allNodes.length; i++) {
+      if (this.x >= allNodes[i].xRange[0] - 50 &&
+          this.x <= allNodes[i].xRange[1] + 50 &&
+          this.y >= allNodes[i].yRange[0] - 50 &&
+          this.y <= allNodes[i].yRange[1] + 50)
           {
             this.x = this.generateRandomX();
             this.y = this.generateRandomY();
@@ -61,20 +59,13 @@ class SourceNode {
     ctx.lineTo(this.x + 150 * this.factor,this.y + 100 * this.factor);
     ctx.lineTo(this.x + 75 * this.factor, this.y + 200 * this.factor);
     ctx.lineTo(this.x + 0 * this.factor,this.y + 100 * this.factor);
-
-    //Define the style of the shape
     ctx.lineWidth = 6;
-
     ctx.strokeStyle = "#000000";
     ctx.font = "20px Georgia";
     ctx.fillStyle = "#000000";
     ctx.fillText(this.val, this.x + 58 * this.factor, this.y + 275 * this.factor);
     ctx.fillStyle = this.color;
-
-    //Close the path
     ctx.closePath();
-
-    //Fill the path with ourline and color
     ctx.fill();
     ctx.stroke();
 
