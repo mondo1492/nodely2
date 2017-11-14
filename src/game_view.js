@@ -302,7 +302,7 @@ class GameView {
       if (this.newGame) {
         this.sourceNodes.push(new SourceNode(this.combineAllNodes()));
         this.sourceNodes.push(new SourceNode(this.combineAllNodes()));
-        this.sinkNodes.push(new SinkNode(this.combineAllNodes(), 5));
+        this.sinkNodes.push(new SinkNode(this.combineAllNodes(), 1));
         this.newGame = false;
       }
 

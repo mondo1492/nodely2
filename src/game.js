@@ -29,7 +29,7 @@ class Game {
 Game.DIM_X = 1000;
 Game.DIM_Y = 600;
 Game.COLORS = {
-  1: 'white',
+  1: '#DCDCC6',
   2: 'yellow',
   3: 'teal',
   4: 'pink',

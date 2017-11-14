@@ -43,13 +43,11 @@ class SubNode {
         fullyPowered = false;
       }
     });
-    console.log(fullyPowered);
     return fullyPowered;
   }
 
   checkStatus() {
     let allGreaterThanOne = true;
-    console.log(this.addedValues);
     Object.keys(this.addedValues).forEach((key) => {
       if (this.addedValues[key] < 1) {
         allGreaterThanOne = false;
@@ -64,13 +62,11 @@ class SubNode {
     Object.keys(this.addedValues).forEach((key) => {
       this.addedValues[key] -= 1;
     });
-    console.log('decreased');
   }
 
   setAddedValues(id) {
     if (!(String(id) in this.addedValues)) {
       this.addedValues[String(id)] = 0;
-      console.log("SETTTTT", this.count,  this.addedValues);
     }
 
   }
@@ -83,7 +79,6 @@ class SubNode {
     } else {
       this.addedValues[stringId] = 0;
     }
-    // console.log("ADDDEEEEEDDDDDD", this.count,  this.addedValues);
   }
 
 

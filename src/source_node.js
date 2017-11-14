@@ -73,7 +73,7 @@ class SourceNode {
 }
 
 SourceNode.ASSOC_COLOR = {
-  1: "#F5F5DC",
+  1: "#DCDCC6",
   2: "#FFFF00",
   3: "#0000FF",
   4: "#FFA500",

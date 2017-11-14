@@ -98,7 +98,7 @@ class Game {
 Game.DIM_X = 1000;
 Game.DIM_Y = 600;
 Game.COLORS = {
-  1: 'white',
+  1: '#DCDCC6',
   2: 'yellow',
   3: 'teal',
   4: 'pink',
@@ -445,7 +445,7 @@ class GameView {
       if (this.newGame) {
         this.sourceNodes.push(new SourceNode(this.combineAllNodes()));
         this.sourceNodes.push(new SourceNode(this.combineAllNodes()));
-        this.sinkNodes.push(new SinkNode(this.combineAllNodes(), 5));
+        this.sinkNodes.push(new SinkNode(this.combineAllNodes(), 1));
         this.newGame = false;
       }
 
@@ -623,7 +623,7 @@ class SourceNode {
 }
 
 SourceNode.ASSOC_COLOR = {
-  1: "#F5F5DC",
+  1: "#DCDCC6",
   2: "#FFFF00",
   3: "#0000FF",
   4: "#FFA500",
@@ -682,13 +682,11 @@ class SubNode {
         fullyPowered = false;
       }
     });
-    console.log(fullyPowered);
     return fullyPowered;
   }
 
   checkStatus() {
     let allGreaterThanOne = true;
-    console.log(this.addedValues);
     Object.keys(this.addedValues).forEach((key) => {
       if (this.addedValues[key] < 1) {
         allGreaterThanOne = false;
@@ -703,13 +701,11 @@ class SubNode {
     Object.keys(this.addedValues).forEach((key) => {
       this.addedValues[key] -= 1;
     });
-    console.log('decreased');
   }
 
   setAddedValues(id) {
     if (!(String(id) in this.addedValues)) {
       this.addedValues[String(id)] = 0;
-      console.log("SETTTTT", this.count,  this.addedValues);
     }
 
   }
@@ -722,7 +718,6 @@ class SubNode {
     } else {
       this.addedValues[stringId] = 0;
     }
-    // console.log("ADDDEEEEEDDDDDD", this.count,  this.addedValues);
   }
 
 
