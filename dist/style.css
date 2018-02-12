@@ -46,7 +46,7 @@ html {
 }
 #canvas {
   border: #666 1px solid;
-  background-color: #fff7e5;
+  background-image: radial-gradient(circle, white, #49D649);
 }
 #text-container {
   margin-top: 250px;
