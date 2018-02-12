@@ -1,4 +1,9 @@
+html {
+  background: black;
+}
+
 #game {
+  margin-top: 40px;
   display: flex;
   justify-content: center;
 }
@@ -11,9 +16,12 @@
 
 #img1 {
   position: absolute;
+  margin-top: 40px;
+  border: 1px solid white;
 }
 
 #vid {
+  margin-top: 40px;
   margin-left: -10px;
   position: absolute;
 }
@@ -38,7 +46,7 @@
 }
 #canvas {
   border: #666 1px solid;
-  background-color: #01ffff;
+  background-color: #fff7e5;
 }
 #text-container {
   margin-top: 250px;
@@ -61,12 +69,10 @@ h4 {
   color: white;
   padding: none;
   height: 0px;
-  width: 33333px;
   font-size: 40px;
 }
 h5 {
   position: relative;
-  width: 333333px;
   padding: none;
   height: 0px;
   color: white;

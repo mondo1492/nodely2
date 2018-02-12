@@ -841,11 +841,13 @@ class SinkNode {
     this.count = 0;
     this.outOfTime = false;
     this.degrees = 360;
+    this.hue = 0;
   }
 
   updateTimeAlive() {
     this.timeAlive -= 1;
     this.degrees -= .1;
+    this.hue -= 1;
     if (this.degrees <= 1) {
       this.outOfTime = true;
     }
@@ -878,17 +880,36 @@ class SinkNode {
     return Math.floor(Math.random() * (Game.DIM_Y - 110) + 20);
   }
 
+  blackToRed() {
+    switch(true) {
+      case (this.degrees < 45):
+        return 'red';
+      case (this.degrees < 90):
+        return 'orange';
+      case (this.degrees < 180):
+        return 'yellow';
+      default:
+        return 'black';
+    }
+  }
+
   drawSinkNode(ctx) {
     ctx.beginPath();
     ctx.arc(this.x, this.y, 25, 0, this.degrees * Math.PI / 180, false);
+    ctx.strokeStyle = this.blackToRed();
+    ctx.lineWidth = 20;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, 20, 0, Math.PI * 180, false);
     ctx.fillStyle = Game.COLORS[this.val];
     ctx.fill();
-    ctx.lineWidth = 15;
-    ctx.strokeStyle = '#003300';
-    ctx.font = "30px Georgia";
-    ctx.fillStyle = "#000000";
-    ctx.fillStyle = 'white';
-    ctx.fillText(this.val, this.x - 8, this.y + 5);
+    ctx.strokeStyle = Game.COLORS[this.val];
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = 'black';
+    ctx.font = "bold 30px Sans-Serif";
+    ctx.fillStyle = "black";
+    ctx.fillText(this.val, this.x - 8, this.y + 9);
     ctx.stroke();
   }
 }
